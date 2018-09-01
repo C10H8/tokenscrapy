@@ -10,5 +10,14 @@ import scrapy
 
 class TokenscrapyItem(scrapy.Item):
     # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    id = scrapy.Field()
+    image_url = scrapy.Field()
+    name = scrapy.Field()
+    example = scrapy.Field()
+    des = scrapy.Field()
+    price = scrapy.Field()
+    change = scrapy.Field()
+    volume = scrapy.Field()
+    market_cap = scrapy.Field()
+
+
