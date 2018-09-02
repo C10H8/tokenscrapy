@@ -20,7 +20,8 @@ class QuotesSpider(scrapy.Spider):
     def parse(self, response):
         for token in response.xpath('//table[@class="table table-bordered table-striped"]/tbody/tr'):
             item = TokenscrapyItem()
-            item["id"] = token.xpath('./td/b/span[@style="position:relative; top:8px"]/text()').extract_first()[1:]
+            id = token.xpath('./td/b/span[@style="position:relative; top:8px"]/text()').extract_first()[1:]
+            item["id"] = int(id)
             item["image_url"] = response.urljoin(token.xpath('./td[@align="center"]/a/img/@src').extract_first())
             margin = token.xpath('./td/h5/a/text()').extract_first()
             find_res = re.findall(self.p, margin)
@@ -35,5 +36,5 @@ class QuotesSpider(scrapy.Spider):
 
         next_page_url = response.xpath('//a[@class="btn btn-default btn-xs logout"]/@href').extract_first()
         if next_page_url is not None:
-           yield scrapy.Request(response.urljoin(next_page_url))
+            yield scrapy.Request(response.urljoin(next_page_url))
 
